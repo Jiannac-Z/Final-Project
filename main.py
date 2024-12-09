@@ -24,7 +24,7 @@ def assign_information_volume_to_clients(num_clients,adjacency_matrix, clients):
 
         # 总信息量
         clients[i].information_volume = local_data_size + neighbor_data_size
-        #print(f"User {i}, information {clients[i].information_volume}")
+        print(f"User {i}, information {clients[i].information_volume}")
 
 global_model = MultimodalGNN(input_dim=768, hidden_dim=64, output_dim=32).to('cpu')
 server = FederatedServer(global_model)
