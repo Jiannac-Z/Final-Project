@@ -76,11 +76,11 @@ for round in range(rounds):
     # 模型聚合
     global_model_state = server.aggregate(client_models)
     # 分发邻居梯度
-    #neighbor_gradients = server.distribute_neighbor_gradients(client_gradients, new_metric)
+    neighbor_gradients = server.distribute_neighbor_gradients(client_gradients, new_metric)
     # 更新客户端模型
     for client in scheduled_clients:
         client.model.load_state_dict(global_model_state)
-        #client.local_train(global_model_state)
+        client.local_train(global_model_state)
     #avg_loss, accuracy = evaluate_model(global_model, test_loader, device='cpu')
     accuracy = evaluate_model(global_model, test_loader, device='cpu')
     print(f"Global Model Test - Round {round + 1}: Accuracy = {accuracy:.4f}")
